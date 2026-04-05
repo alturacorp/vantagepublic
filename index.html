@@ -219,20 +219,20 @@ body.redacted .redact-target{filter:blur(4px);user-select:none;pointer-events:no
 .vuln-item.bridge{border-left:3px solid var(--red)}
 .vuln-item.articulation{border-left:3px solid var(--amber)}
 
-/* ── NHCR EDITOR ── */
-.nhcr-registry{margin-bottom:10px;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.nhcr-reg-head{padding:6px 10px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;cursor:pointer}
-.nhcr-reg-title{font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;font-family:'DM Mono',monospace;flex:1}
-.nhcr-reg-badge{font-family:'DM Mono',monospace;font-size:7px;padding:1px 5px;border-radius:2px}
-.nhcr-reg-body{padding:8px 10px;display:flex;flex-direction:column;gap:5px}
-.nhcr-field{display:flex;align-items:baseline;gap:6px}
-.nhcr-field-key{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);min-width:72px;flex-shrink:0;padding-top:5px}
-.nhcr-field-val{flex:1;background:var(--panel2);border:1px solid var(--line2);border-radius:3px;padding:4px 7px;color:var(--text);font-size:10px;font-family:'DM Mono',monospace;outline:none;transition:border-color .12s;resize:none;width:100%;min-height:24px}
-.nhcr-field-val:focus{border-color:var(--accent)}
-.nhcr-sir-alert{background:var(--red-d);border:1px solid rgba(255,64,64,0.25);border-radius:3px;padding:6px 8px;font-size:9px;color:var(--red);font-family:'DM Mono',monospace;margin-bottom:6px;line-height:1.6}
-.nhcr-save-bar{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-top:1px solid var(--line);background:var(--panel);flex-shrink:0}
-.nhcr-unsaved{font-family:'DM Mono',monospace;font-size:8px;color:var(--amber);display:none}
-.nhcr-unsaved.show{display:block}
+/* ── registry EDITOR ── */
+.registry-registry{margin-bottom:10px;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.registry-reg-head{padding:6px 10px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;cursor:pointer}
+.registry-reg-title{font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;font-family:'DM Mono',monospace;flex:1}
+.registry-reg-badge{font-family:'DM Mono',monospace;font-size:7px;padding:1px 5px;border-radius:2px}
+.registry-reg-body{padding:8px 10px;display:flex;flex-direction:column;gap:5px}
+.registry-field{display:flex;align-items:baseline;gap:6px}
+.registry-field-key{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);min-width:72px;flex-shrink:0;padding-top:5px}
+.registry-field-val{flex:1;background:var(--panel2);border:1px solid var(--line2);border-radius:3px;padding:4px 7px;color:var(--text);font-size:10px;font-family:'DM Mono',monospace;outline:none;transition:border-color .12s;resize:none;width:100%;min-height:24px}
+.registry-field-val:focus{border-color:var(--accent)}
+.registry-sir-alert{background:var(--red-d);border:1px solid rgba(255,64,64,0.25);border-radius:3px;padding:6px 8px;font-size:9px;color:var(--red);font-family:'DM Mono',monospace;margin-bottom:6px;line-height:1.6}
+.registry-save-bar{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-top:1px solid var(--line);background:var(--panel);flex-shrink:0}
+.registry-unsaved{font-family:'DM Mono',monospace;font-size:8px;color:var(--amber);display:none}
+.registry-unsaved.show{display:block}
 
 /* ── BIOCAPTURE ── */
 .bio-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:700;display:none;align-items:center;justify-content:center}
@@ -1198,7 +1198,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
         <select class="qb-select" id="qb-find" onchange="updateQBPreview()"><option value="persons">Persons</option><option value="objects">All objects</option><option value="locations">Locations</option><option value="financial">Financial objects</option><option value="organisations">Organisations</option><option value="flagged">Flagged objects</option></select>
       </div>
       <div class="qb-clause"><span class="qb-clause-label">WHERE</span>
-        <select class="qb-select" id="qb-where" onchange="updateQBPreview()"><option value="any">Any object</option><option value="lbi.flag = TRUE">LBI flag active</option><option value="flag = DFI">Flagged</option><option value="type = flag">In custody / priority</option><option value="nhcr.sir CONTAINS custody">SIR: in custody</option><option value="has.annotations">Has annotations</option></select>
+        <select class="qb-select" id="qb-where" onchange="updateQBPreview()"><option value="any">Any object</option><option value="lbi.flag = TRUE">LBI flag active</option><option value="flag = DFI">Flagged</option><option value="type = flag">In custody / priority</option><option value="registry.sir CONTAINS custody">SIR: in custody</option><option value="has.annotations">Has annotations</option></select>
       </div>
       <div class="qb-clause"><span class="qb-clause-label">LINKED-TO</span>
         <select class="qb-select" id="qb-linked" onchange="updateQBPreview()"><option value="">— (no link filter) —</option></select>
@@ -1229,7 +1229,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
         <select class="fi" id="le-source-type">
           <option>CCTV / Surveillance footage</option>
           <option>Witness statement</option>
-          <option>NHCR registry data</option>
+          <option>Registry data</option>
           <option>Financial intelligence</option>
           <option>Communications intercept</option>
           <option>Physical evidence</option>
@@ -1350,7 +1350,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
     <div class="bio-footer">
       <div class="tbtn tbtn-g" onclick="closeBioCapture()">Close</div>
       <div class="tbtn tbtn-s" id="bio-capture-btn" onclick="runBioCapture()">⊛ Capture</div>
-      <div class="tbtn tbtn-p" id="bio-confirm-btn" style="display:none" onclick="confirmBioCapture()">✓ Confirm &amp; Submit to NHCR</div>
+      <div class="tbtn tbtn-p" id="bio-confirm-btn" style="display:none" onclick="confirmBioCapture()">✓ Confirm &amp; Submit to registry</div>
     </div>
   </div>
 </div>
@@ -1396,7 +1396,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
   <div class="ctx-sep"></div>
   <div class="ctx-item" onclick="ctxAction('flag')">⚑ Add flag</div>
   <div class="ctx-item" onclick="ctxAction('annotate')">✎ Add annotation</div>
-  <div class="ctx-item" onclick="ctxAction('nhcr')">⊞ Registry pull</div>
+  <div class="ctx-item" onclick="ctxAction('registry')">⊞ Registry pull</div>
   <div class="ctx-item" onclick="ctxAction('biocapture')">⬡ BioCapture</div>
   <div class="ctx-sep"></div>
   <div class="ctx-item" onclick="ctxAction('pin')">📌 <span id="ctx-pin-label">Pin node</span></div>
@@ -1697,7 +1697,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
     <div class="rb" title="Search" onclick="focusQuery()">⊕</div>
     <div class="rb" title="Filter" onclick="openModal('modal-filter')">◫</div>
     <div class="rail-sep"></div>
-    <div class="rb" title="NHCR Pull" onclick="openModal('modal-nhcr')">⊞</div>
+    <div class="rb" title="registry Pull" onclick="openModal('modal-registry')">⊞</div>
     <div class="rb" title="Add Object" onclick="openModal('modal-add-obj')">⊛</div>
     <div class="rb" title="Alerts" id="alert-rb" onclick="showAlerts()">⊘</div>
     <div class="rail-bot">
@@ -1733,7 +1733,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
       <div class="tbtn tbtn-s" onclick="openModal('modal-add-obj')">⊕ Object</div>
       <div class="tbtn tbtn-s" onclick="openModal('modal-add-link')">⊞ Link</div>
       <div class="tbtn tbtn-g" onclick="openModal('modal-csv')">↑ Import</div>
-      <div class="tbtn tbtn-g" onclick="nhcrPull()">⊛ Registry Explorer</div>
+      <div class="tbtn tbtn-g" onclick="registryPull()">⊛ Registry Explorer</div>
       <div class="tbtn tbtn-g" onclick="openBioCapture()">⬡ BioCapture</div>
       <div class="tbtn tbtn-g" onclick="lbiFeed()">⊘ Intel Feed</div>
       <div class="tsep"></div>
@@ -1837,7 +1837,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
           <div class="rp-tab active" onclick="rpTab(this,'details')">Details</div>
           <div class="rp-tab" onclick="rpTab(this,'links')">Links</div>
           <div class="rp-tab" onclick="rpTab(this,'flags')">Flags</div>
-          <div class="rp-tab" onclick="rpTab(this,'nhcr')">Reg. Explorer</div>
+          <div class="rp-tab" onclick="rpTab(this,'registry')">Reg. Explorer</div>
           <div class="rp-tab" onclick="rpTab(this,'biocapture')">BioCapture</div>
           <div class="rp-tab" onclick="rpTab(this,'history')">History</div>
           <div class="rp-tab" onclick="rpTab(this,'path')">Path</div>
@@ -1883,7 +1883,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
     <div class="mbody">
       <div class="form-row"><label class="fl">Object Type</label><select class="fi" id="ao-type"><option value="person">Person</option><option value="org">Organisation</option><option value="location">Location</option><option value="finance">Financial Object</option><option value="event">Event</option></select></div>
       <div class="form-row"><label class="fl">Label / Name</label><input class="fi" id="ao-name" placeholder="Full name or designation..."></div>
-      <div class="form-row"><label class="fl">Registry Reference (if applicable)</label><input class="fi" id="ao-nhcr" placeholder="NHCR-XX-XX-XX-XXXX"></div>
+      <div class="form-row"><label class="fl">Registry Reference (if applicable)</label><input class="fi" id="ao-registry" placeholder="registry-XX-XX-XX-XXXX"></div>
       <div class="form-row"><label class="fl">Initial Notes</label><textarea class="fi" id="ao-notes" placeholder="Context, source, analyst notes..."></textarea></div>
       <div class="form-row"><label class="fl">Flag Level</label><select class="fi" id="ao-flag"><option value="none">None</option><option value="amber">Watch</option><option value="red">Priority / Custody</option></select></div>
     </div>
@@ -1906,17 +1906,17 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
   </div>
 </div>
 
-<!-- NHCR PULL MODAL -->
-<div class="modal-ov" id="modal-nhcr">
+<!-- registry PULL MODAL -->
+<div class="modal-ov" id="modal-registry">
   <div class="modal">
-    <div class="mhd"><span class="mhd-title">Registry Direct Pull</span><button class="mclose" onclick="closeModal('modal-nhcr')">✕</button></div>
+    <div class="mhd"><span class="mhd-title">Registry Direct Pull</span><button class="mclose" onclick="closeModal('modal-registry')">✕</button></div>
     <div class="mbody">
       <div style="background:var(--amber-d);border:1px solid rgba(255,170,0,0.2);border-radius:3px;padding:8px 10px;font-size:9px;color:var(--amber);font-family:'DM Mono',monospace;margin-bottom:12px">All registry queries are logged to the security intelligence audit trail and visible to authorised oversight.</div>
-      <div class="form-row"><label class="fl">Registry Reference</label><input class="fi" id="nhcr-ref" placeholder="RID-XX-XX-XX-XXXX"></div>
-      <div class="form-row"><label class="fl">Registry Access Level</label><select class="fi" id="nhcr-level"><option value="ear">Education + Employment (public)</option><option value="cppr">+ Civic Record</option><option value="sir" selected>+ Security Intelligence Record</option><option value="lbi">+ Behaviour Index (senior analyst)</option></select></div>
-      <div class="form-row"><label class="fl">Add to Graph as Object</label><select class="fi" id="nhcr-add"><option value="yes">Yes — create new node</option><option value="link">Yes — link to existing node</option><option value="no">No — view only</option></select></div>
+      <div class="form-row"><label class="fl">Registry Reference</label><input class="fi" id="registry-ref" placeholder="RID-XX-XX-XX-XXXX"></div>
+      <div class="form-row"><label class="fl">Registry Access Level</label><select class="fi" id="registry-level"><option value="ear">Education + Employment (public)</option><option value="cppr">+ Civic Record</option><option value="sir" selected>+ Security Intelligence Record</option><option value="lbi">+ Behaviour Index (senior analyst)</option></select></div>
+      <div class="form-row"><label class="fl">Add to Graph as Object</label><select class="fi" id="registry-add"><option value="yes">Yes — create new node</option><option value="link">Yes — link to existing node</option><option value="no">No — view only</option></select></div>
     </div>
-    <div class="mfoot"><div class="tbtn tbtn-g" onclick="closeModal('modal-nhcr')">Cancel</div><div class="tbtn tbtn-p" onclick="runNHCRPull()">Pull Record</div></div>
+    <div class="mfoot"><div class="tbtn tbtn-g" onclick="closeModal('modal-registry')">Cancel</div><div class="tbtn tbtn-p" onclick="runregistryPull()">Pull Record</div></div>
   </div>
 </div>
 
@@ -1978,52 +1978,52 @@ let NODES=[
   {id:'suspect_a',type:'flag',label:'SUBJECT ALPHA',sub:'RID-82-04-22-7741 · IN CUSTODY',x:0,y:0,
    details:{'Date of Birth':'22 APR 1982','Sex':'Male','District':'Central District','Status':'In custody — arrest processing complete','Employment History':'Meridian Security Ltd (2019–2022)','Prior Convictions':'2 — assault, 2018; handling stolen goods, 2020','Financial Flags':'Unexplained deposits Nov 2022–Jan 2023'},
    flags:[{t:'red',title:'IN CUSTODY',text:'Arrested 14 Mar. Biometric capture complete. Linked to three-victim homicide.'},{t:'amber',title:'BEHAVIOURAL FLAG',text:'Anomaly flag raised Nov 2022. Review queued.'},{t:'amber',title:'FOREIGN ASSOCIATE',text:'Known contact with foreign national — restricted file.'}],
-   nhcr:{EAR:'Secondary — vocational',PER:'Security sector — lapsed registration',CPPR:'Below standard participation',SIR:'Entry created 14 Mar — IN CUSTODY',LBI:'Score 342 · Anomaly flag Nov 2022',MCSI:'DEVELOPING — 412'},
+   registry:{EAR:'Secondary — vocational',PER:'Security sector — lapsed registration',CPPR:'Below standard participation',SIR:'Entry created 14 Mar — IN CUSTODY',LBI:'Score 342 · Anomaly flag Nov 2022',MCSI:'DEVELOPING — 412'},
    annotations:[],history:['Created 14 Mar — Lead Analyst','Registry pull — 09:46','Behavioural flag confirmed — 09:47']},
   {id:'foreign_nat',type:'dfi',label:'IVANOV, D. (foreign national)',sub:'Foreign national · VICTIM · WATCH LIST',x:0,y:0,
    details:{'Date of Birth':'03 NOV 1972','Sex':'Male','Nationality':'Unknown','Visa':'Business entry — under review','Registry':'Foreign national — limited domestic record','Watch List':'ACTIVE — financial connections'},
    flags:[{t:'red',title:'DECEASED',text:'Victim — homicide case. Incident scene, 16 Mar.'},{t:'amber',title:'FINANCIAL INTELLIGENCE FLAG',text:'Connections to offshore investment structures. Financial intelligence unit referral active.'},{t:'amber',title:'OFFSHORE LINK',text:'Holding structures linked to payment routing entity. Proceeds of crime inquiry intersection.'}],
-   nhcr:{'Registry':'Foreign national — limited','Visa Reference':'VISA-2023-0241','Intelligence File':'ACTIVE — restricted access','SIR':'Entry created re homicide case','Full File':'Authorised access only'},
+   registry:{'Registry':'Foreign national — limited','Visa Reference':'VISA-2023-0241','Intelligence File':'ACTIVE — restricted access','SIR':'Entry created re homicide case','Full File':'Authorised access only'},
    annotations:[],history:['Created 16 Mar — Lead Analyst','Financial intelligence referral confirmed — 08:15']},
   {id:'meridian',type:'org',label:'Meridian Security Ltd',sub:'Private security contractor',x:0,y:0,
    details:{'Type':'Private security contractor','Status':'Active — under investigation','Contracts':'Multiple residential and commercial','Staff':'42 registered operatives','Financial':'Legitimate revenue + unexplained transfers'},
    flags:[{t:'blue',title:'INTELLIGENCE INTEREST',text:'Subject Alpha previously employed. Contracts cover incident location.'},{t:'amber',title:'FINANCIAL ROUTING',text:'Payments routed through intermediary shell. Financial intelligence unit flagged.'}],
-   nhcr:{'Registry':'Commercial entity','Registration':'Active','Investigation Status':'Subject of financial inquiry','Full Record':'Authorised access only'},
+   registry:{'Registry':'Commercial entity','Registration':'Active','Investigation Status':'Subject of financial inquiry','Full Record':'Authorised access only'},
    annotations:[],history:['Created 14 Mar — Lead Analyst','Contract link confirmed — 10:05']},
   {id:'incident_loc',type:'location',label:'Riverside Quarter, Block 4',sub:'Incident scene · Central District',x:0,y:0,
    details:{'Address':'Riverside Quarter, Block 4, Central District','Units':'64 residential + commercial ground floor','Security':'Meridian Security Ltd contract','Scene Status':'Forensic examination complete · sealed','CCTV':'Partial coverage — gaps identified'},
    flags:[{t:'red',title:'ACTIVE INCIDENT SCENE',text:'Three victims, 16 Mar. Scene sealed pending forensic completion.'},{t:'blue',title:'SECURITY CONTRACTOR',text:'Meridian Security holds contract. Subject Alpha previously worked this site.'}],
-   nhcr:{'District':'Central District','Station':'Central 4','Profile':'Below district average — prior incidents'},
+   registry:{'District':'Central District','Station':'Central 4','Profile':'Below district average — prior incidents'},
    annotations:[],history:['Created 16 Mar — Lead Analyst','Forensic upload — 09:00','Contractor link confirmed — 09:10']},
   {id:'offshore_co',type:'dfi',label:'Helix Investments Ltd',sub:'WATCH LIST · Offshore holding structure',x:0,y:0,
    details:{'Type':'Offshore investment holding','Jurisdiction':'Third-country registered','Status':'ACTIVE — financial intelligence watch','Connection':'Confirmed financial association with foreign national','Proceeds Inquiry':'Active intersection'},
    flags:[{t:'red',title:'WATCH LIST — ACTIVE',text:'Offshore vehicle. Financial intelligence unit watch. Proceeds of crime inquiry intersection.'},{t:'amber',title:'PROCEEDS OF CRIME',text:'Routing architecture linked to active proceeds of crime inquiry.'}],
-   nhcr:{'Registry':'Foreign entity — intelligence file only','Reference':'FIN-INT-2023-04','Access':'Authorised access minimum','Domestic Access':'Restricted — financial intelligence briefing required'},
+   registry:{'Registry':'Foreign entity — intelligence file only','Reference':'FIN-INT-2023-04','Access':'Authorised access minimum','Domestic Access':'Restricted — financial intelligence briefing required'},
    annotations:[],history:['Created 16 Mar — Lead Analyst','Financial intelligence confirmation — 10:45']},
   {id:'shell_co',type:'finance',label:'Orion Capital Partners',sub:'Financial routing entity',x:0,y:0,
    details:{'Type':'Asset management consultancy','Status':'Active — under investigation','Function':'Payment routing — multiple beneficial owners','Staff':'8 registered — beneficial ownership opaque','Intelligence':'Partial monitoring — flagged'},
    flags:[{t:'blue',title:'FINANCIAL INTELLIGENCE',text:'Primary routing entity in proceeds flow. Beneficial ownership under investigation.'},{t:'amber',title:'OFFSHORE LINK',text:'Payments to and from offshore holding. Homicide case financial intersection.'}],
-   nhcr:{'Registry':'Commercial entity','Status':'Active inquiry','Intelligence Flag':'Under review','Full Record':'Financial intelligence unit authority only'},
+   registry:{'Registry':'Commercial entity','Status':'Active inquiry','Intelligence Flag':'Under review','Full Record':'Financial intelligence unit authority only'},
    annotations:[],history:['Created 16 Mar — Lead Analyst']},
   {id:'unknown_contact',type:'flag',label:'UNIDENTIFIED — "MR VALE"',sub:'Alias only · Foreign contact',x:0,y:0,
    details:{'Real Identity':'UNKNOWN','Alias':'"Mr Vale"','Context':'Third-country contact — payment recipient','Assessment':'Active identification effort','Biometric':'No domestic record'},
    flags:[{t:'red',title:'UNIDENTIFIED SUBJECT',text:'Identity unknown. Alias only. Active identification effort ongoing.'},{t:'amber',title:'FINANCIAL LINK',text:'Payment recipient via routing entity. Same financial architecture as foreign national.'},{t:'amber',title:'INTELLIGENCE INTEREST',text:'Third-country movement indicators. Financial intelligence intersection with homicide case.'}],
-   nhcr:{'Registry':'No domestic record','Intelligence File':'ACTIVE','Biometric':'No capture on file'},
+   registry:{'Registry':'No domestic record','Intelligence File':'ACTIVE','Biometric':'No capture on file'},
    annotations:[],history:['Created 18 Mar — financial intelligence referral']},
   {id:'victim_b',type:'person',label:'OKAFOR, M.',sub:'Victim · Central District resident',x:0,y:0,
    details:{'Date of Birth':'12 JUN 1989','Sex':'Female','District':'Central District','Occupation':'Retail management','Prior Record':'None'},
    flags:[{t:'red',title:'VICTIM — DECEASED',text:'Homicide case. Incident scene, 16 Mar.'}],
-   nhcr:{EAR:'Secondary — academic',PER:'Retail — registered',CPPR:'Standard participation',SIR:'No prior entries',LBI:'No anomaly flags'},
+   registry:{EAR:'Secondary — academic',PER:'Retail — registered',CPPR:'Standard participation',SIR:'No prior entries',LBI:'No anomaly flags'},
    annotations:[],history:['Created 16 Mar — Lead Analyst']},
   {id:'victim_c',type:'person',label:'CHEN, W.',sub:'Victim · Block 4 resident',x:0,y:0,
    details:{'Date of Birth':'14 MAR 1980','Sex':'Male','District':'Central District — Block 4','Occupation':'Construction','Prior Record':'None — minor civil matter 2019'},
    flags:[{t:'red',title:'VICTIM — DECEASED',text:'Homicide case. Block 4 resident.'},{t:'amber',title:'CONTRACTOR LINK',text:'Meridian Security contract covers victim residence. Relationship under investigation.'}],
-   nhcr:{EAR:'Secondary — technical',PER:'Construction — self-employed',CPPR:'Below standard participation',SIR:'No prior entries',LBI:'No anomaly flags'},
+   registry:{EAR:'Secondary — technical',PER:'Construction — self-employed',CPPR:'Below standard participation',SIR:'No prior entries',LBI:'No anomaly flags'},
    annotations:[],history:['Created 16 Mar — Lead Analyst']},
   {id:'witness',type:'person',label:'PATEL, R.',sub:'Witness · Discovered scene',x:0,y:0,
    details:{'Date of Birth':'08 SEP 1975','Sex':'Male','District':'Central District — Block 4','Role':'Discovered scene 03:41, 16 Mar','Prior Record':'None'},
    flags:[{t:'blue',title:'WITNESS',text:'Discovered incident scene. Statement filed 04:20, 16 Mar. No adverse intelligence flags.'}],
-   nhcr:{EAR:'Secondary — academic',PER:'Public sector',CPPR:'Standard participation',SIR:'No prior entries',LBI:'No anomaly flags'},
+   registry:{EAR:'Secondary — academic',PER:'Public sector',CPPR:'Standard participation',SIR:'No prior entries',LBI:'No anomaly flags'},
    annotations:[],history:['Created 16 Mar — Lead Analyst']},
 ];
 
@@ -2114,14 +2114,14 @@ let graphSnapshot=null;
 const undoStack=[];
 const MAX_UNDO=20;
 function pushUndo(){
-  const snap=JSON.parse(JSON.stringify({nodes:NODES.map(n=>({id:n.id,x:n.x,y:n.y,vx:0,vy:0,flags:n.flags,annotations:n.annotations,history:n.history,details:n.details,nhcr:n.nhcr})),links:LINKS.map(l=>({...l}))}));
+  const snap=JSON.parse(JSON.stringify({nodes:NODES.map(n=>({id:n.id,x:n.x,y:n.y,vx:0,vy:0,flags:n.flags,annotations:n.annotations,history:n.history,details:n.details,registry:n.registry})),links:LINKS.map(l=>({...l}))}));
   undoStack.push(snap);
   if(undoStack.length>MAX_UNDO)undoStack.shift();
 }
 function undo(){
   if(!undoStack.length){notify('Nothing to undo.','','amber');return;}
   const snap=undoStack.pop();
-  snap.nodes.forEach(sn=>{const n=NODES.find(x=>x.id===sn.id);if(n){n.x=sn.x;n.y=sn.y;n.flags=sn.flags;n.annotations=sn.annotations;n.history=sn.history;n.details=sn.details;n.nhcr=sn.nhcr;}});
+  snap.nodes.forEach(sn=>{const n=NODES.find(x=>x.id===sn.id);if(n){n.x=sn.x;n.y=sn.y;n.flags=sn.flags;n.annotations=sn.annotations;n.history=sn.history;n.details=sn.details;n.registry=sn.registry;}});
   // Restore link state
   LINKS.length=0;snap.links.forEach(l=>LINKS.push(l));
   renderSidebar();updateCounts();draw();
@@ -2179,7 +2179,7 @@ function ctxAction(action){
   }
   else if(action==='flag'){selectNode(id);addFlag();}
   else if(action==='annotate'){selectNode(id);openModal('modal-annotation');}
-  else if(action==='nhcr'){selectNode(id);nhcrPullForNode();}
+  else if(action==='registry'){selectNode(id);registryPullForNode();}
   else if(action==='pin'){
     if(pinnedNodes.has(id)){pinnedNodes.delete(id);notify('Node unpinned.',NODES.find(n=>n.id===id)?.label,'blue');}
     else{pinnedNodes.add(id);notify('Node pinned.',NODES.find(n=>n.id===id)?.label+' — physics will not move this node.','blue');}
@@ -2515,7 +2515,7 @@ const CMD_ACTIONS=[
   {name:'Add new object',icon:'⊕',action:()=>{closeCmd();openModal('modal-add-obj');}},
   {name:'Add new link',icon:'⊞',action:()=>{closeCmd();openModal('modal-add-link');}},
   {name:'Open BioCapture terminal',icon:'⬡',action:()=>{closeCmd();openBioCapture();}},
-  {name:'NHCR pull',icon:'⊛',action:()=>{closeCmd();nhcrPull();}},
+  {name:'registry pull',icon:'⊛',action:()=>{closeCmd();registryPull();}},
   {name:'New workspace',icon:'⊡',action:()=>{closeCmd();openModal('modal-new-ws');}},
   {name:'Undo last action',icon:'↩',action:()=>{closeCmd();undo();}},
 ];
@@ -3166,11 +3166,11 @@ function importCSV(){
       const flagVal=row.flag?.toLowerCase();
       NODES.push({
         id,type:flagVal==='red'?'flag':flagVal==='amber'?'dfi':type,
-        label:row.label||row.name||id,sub:row.sub||row.nhcr||type,
+        label:row.label||row.name||id,sub:row.sub||row.registry||type,
         x:w/2+(Math.random()-0.5)*300,y:h/2+(Math.random()-0.5)*200,vx:0,vy:0,
         details:Object.fromEntries(Object.entries(row).filter(([k])=>!['id','label','name','type','flag'].includes(k))),
         flags:flagVal&&flagVal!=='none'?[{t:flagVal==='red'?'red':'amber',title:'CSV IMPORT FLAG',text:'Imported from CSV.'}]:[],
-        nhcr:row.nhcr?{'Reference':row.nhcr,'Source':'CSV import'}:{},
+        registry:row.registry?{'Reference':row.registry,'Source':'CSV import'}:{},
         annotations:[],history:['Imported via CSV — '+new Date().toLocaleString()],
       });
       added++;
@@ -3487,7 +3487,7 @@ function ctxAction(action){
   else if(action==='ego'){selectNode(id);expandSelected();}
   else if(action==='flag'){selectNode(id);addFlag();}
   else if(action==='annotate'){selectNode(id);openModal('modal-annotation');}
-  else if(action==='nhcr'){selectNode(id);nhcrPullForNode();}
+  else if(action==='registry'){selectNode(id);registryPullForNode();}
   else if(action==='pin'){if(pinnedNodes.has(id)){pinnedNodes.delete(id);notify('Node unpinned.',NODES.find(n=>n.id===id)?.label,'blue');}else{pinnedNodes.add(id);notify('Node pinned.',NODES.find(n=>n.id===id)?.label+' — physics will not move this node.','blue');}window.draw();}
   else if(action==='delete'){selectNode(id);deleteNode();}
   else if(action==='diff_snap'){takeSnapshot();}
@@ -3861,7 +3861,7 @@ function renderRightPanel(){
         <div class="tbtn tbtn-s" style="font-size:9px" onclick="expandSelected()">Expand links</div>
         <div class="tbtn tbtn-g" style="font-size:9px" onclick="openModal('modal-annotation')">Add note</div>
         <div class="tbtn tbtn-g" style="font-size:9px" onclick="deleteNode()">Remove</div>
-        <div class="tbtn tbtn-g" style="font-size:9px" onclick="nhcrPullForNode()">NHCR pull</div>
+        <div class="tbtn tbtn-g" style="font-size:9px" onclick="registryPullForNode()">registry pull</div>
       </div>`;
   } else if(rpCurrentTab==='links'){
     const myLinks=LINKS.filter(lk=>lk.a===n.id||lk.b===n.id);
@@ -3886,12 +3886,12 @@ function renderRightPanel(){
     let rows=flags.map(f=>`<div class="flag-item ${f.t}"><div class="fl-title ${f.t}">${f.title}</div>${f.text}</div>`).join('');
     body.innerHTML=head+`<div class="esec"><div class="esec-title">Intelligence Flags (${flags.length})</div>${rows||'<div style="font-size:10px;color:var(--text3)">No flags</div>'}</div>
     <div class="tbtn tbtn-g" style="font-size:9px;margin-top:8px" onclick="addFlag()">+ Add flag</div>`;
-  } else if(rpCurrentTab==='nhcr'){
-    body.innerHTML=head+renderNHCREditor(n);
+  } else if(rpCurrentTab==='registry'){
+    body.innerHTML=head+renderregistryEditor(n);
     // Attach change listeners after render
-    body.querySelectorAll('.nhcr-field-val').forEach(el=>{
+    body.querySelectorAll('.registry-field-val').forEach(el=>{
       el.addEventListener('input',()=>{
-        document.getElementById('nhcr-unsaved-'+n.id)?.classList.add('show');
+        document.getElementById('registry-unsaved-'+n.id)?.classList.add('show');
       });
     });
   } else if(rpCurrentTab==='biocapture'){
@@ -4030,7 +4030,7 @@ function runQuery(){
     }
   }
   if(ql.includes('all objects')||ql==='find *'||ql==='*'){results=NODES;}
-  if(ql.includes('nhcr.sir contains')){const m=ql.match(/contains "([^"]+)"/);if(m)results=NODES.filter(n=>JSON.stringify(n.nhcr||{}).toLowerCase().includes(m[1].toLowerCase()));}
+  if(ql.includes('registry.sir contains')){const m=ql.match(/contains "([^"]+)"/);if(m)results=NODES.filter(n=>JSON.stringify(n.registry||{}).toLowerCase().includes(m[1].toLowerCase()));}
 
   if(!results.length&&q.length>2){
     // Free text search
@@ -4081,7 +4081,7 @@ function focusQuery(){document.getElementById('query-input').focus();}
 function addObject(){
   const type=document.getElementById('ao-type').value;
   const name=document.getElementById('ao-name').value.trim();
-  const nhcr=document.getElementById('ao-nhcr').value.trim();
+  const registry=document.getElementById('ao-registry').value.trim();
   const notes=document.getElementById('ao-notes').value.trim();
   const flag=document.getElementById('ao-flag').value;
   if(!name){notify('Error.','Name is required.','red');return;}
@@ -4090,11 +4090,11 @@ function addObject(){
   const id='obj_'+Date.now();
   const newNode={
     id,type:flag==='red'?'flag':flag==='amber'?'dfi':type,
-    label:name,sub:nhcr||type,
+    label:name,sub:registry||type,
     x:w/2+(Math.random()-0.5)*200,y:h/2+(Math.random()-0.5)*150,vx:0,vy:0,
-    details:{'Type':type,'Registry Reference':nhcr||'N/A','Notes':notes||'—','Added by':(currentAccount?.name||'analyst')+' · '+new Date().toLocaleDateString()},
+    details:{'Type':type,'Registry Reference':registry||'N/A','Notes':notes||'—','Added by':(currentAccount?.name||'analyst')+' · '+new Date().toLocaleDateString()},
     flags:flag!=='none'?[{t:flag,title:flag==='red'?'PRIORITY FLAG':'DFI WATCH',text:'Added manually by analyst.'}]:[],
-    nhcr:nhcr?{'Reference':nhcr,'Status':'Manual entry — registry pull required'}:{},
+    registry:registry?{'Reference':registry,'Status':'Manual entry — registry pull required'}:{},
     annotations:[],
     history:['Created '+new Date().toLocaleString()+' — '+(currentAccount?.name||'analyst')],
   };
@@ -4181,31 +4181,31 @@ function addFlag(){
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// NHCR & LBI
+// registry & LBI
 // ═══════════════════════════════════════════════════════════════════════
-function nhcrPull(){openModal('modal-nhcr');}
+function registryPull(){openModal('modal-registry');}
 
-function nhcrPullForNode(){
-  if(selectedNode){document.getElementById('nhcr-ref').value=selectedNode.nhcr?.Reference||selectedNode.sub?.match(/NHCR-[\d-]+/)?.[0]||'';}
-  openModal('modal-nhcr');
+function registryPullForNode(){
+  if(selectedNode){document.getElementById('registry-ref').value=selectedNode.registry?.Reference||selectedNode.sub?.match(/registry-[\d-]+/)?.[0]||'';}
+  openModal('modal-registry');
 }
 
-function runNHCRPull(){
-  const ref=document.getElementById('nhcr-ref').value.trim();
-  const addAs=document.getElementById('nhcr-add').value;
-  closeModal('modal-nhcr');
-  if(!ref){notify('Error.','NHCR reference required.','red');return;}
+function runregistryPull(){
+  const ref=document.getElementById('registry-ref').value.trim();
+  const addAs=document.getElementById('registry-add').value;
+  closeModal('modal-registry');
+  if(!ref){notify('Error.','registry reference required.','red');return;}
   notify('Registry query logged.','Ref: '+ref+' — access recorded to security intelligence audit trail.','amber');
   setTimeout(()=>{
     if(addAs==='yes'&&!NODES.find(n=>n.sub?.includes(ref))){
       const svg=document.getElementById('graph-svg');
       const w=svg.parentElement.offsetWidth,h=svg.parentElement.offsetHeight;
-      const id='nhcr_'+Date.now();
+      const id='registry_'+Date.now();
       NODES.push({id,type:'person',label:'Registry '+ref.slice(-4),sub:ref+' · Pulled '+new Date().toLocaleDateString(),
         x:w/2+(Math.random()-0.5)*200,y:h/2+(Math.random()-0.5)*150,vx:0,vy:0,
-        details:{'Registry Reference':ref,'Pull Date':new Date().toLocaleDateString(),'Analyst':currentAccount?.name||'analyst','Level':document.getElementById('nhcr-level').value},
+        details:{'Registry Reference':ref,'Pull Date':new Date().toLocaleDateString(),'Analyst':currentAccount?.name||'analyst','Level':document.getElementById('registry-level').value},
         flags:[{t:'blue',title:'REGISTRY PULL',text:'Object created from registry direct pull. Full record in Registry tab.'}],
-        nhcr:{'Reference':ref,'Status':'Active pull','Access level':document.getElementById('nhcr-level').value,'Pulled':new Date().toLocaleString()},
+        registry:{'Reference':ref,'Status':'Active pull','Access level':document.getElementById('registry-level').value,'Pulled':new Date().toLocaleString()},
         annotations:[],history:['Created from registry pull '+new Date().toLocaleString()]});
       renderSidebar();updateCounts();draw();
       notify('Object created from registry pull.',ref,'green');
@@ -4324,8 +4324,8 @@ function showAlerts(){
   document.getElementById('qr-panel').classList.add('visible');
 }
 
-function nhcrPull(){openModal('modal-nhcr');}
-function nhcrPullForNode(){if(selectedNode){const ref=selectedNode.nhcr?.Reference||selectedNode.sub?.match(/(?:NHCR|RID)-[\d-]+/)?.[0]||'';document.getElementById('nhcr-ref').value=ref;}openModal('modal-nhcr');}
+function registryPull(){openModal('modal-registry');}
+function registryPullForNode(){if(selectedNode){const ref=selectedNode.registry?.Reference||selectedNode.sub?.match(/(?:registry|RID)-[\d-]+/)?.[0]||'';document.getElementById('registry-ref').value=ref;}openModal('modal-registry');}
 
 function createWorkspace(){
   const name=document.getElementById('ws-name').value.trim()||'New Investigation';
@@ -5583,9 +5583,9 @@ function applyClassificationOptions(){
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// NHCR EDITOR
+// registry EDITOR
 // ═══════════════════════════════════════════════════════════════════════
-const NHCR_REGISTRIES=[
+const registry_REGISTRIES=[
   {key:'EDU', label:'Education & Qualification Register', color:'var(--accent)',
    fields:['Highest Qualification','Institution','Completion Year','Professional Certifications','Last Updated'],
    desc:'Academic and vocational qualification records.'},
@@ -5606,143 +5606,143 @@ const NHCR_REGISTRIES=[
    desc:'Composite civil standing score. Public-facing band visible to subject.'},
 ];
 
-function renderNHCREditor(n){
-  const nhcr=n.nhcr||{};
-  const hasSIR=nhcr.SIR&&nhcr.SIR!=='No prior entries';
+function renderregistryEditor(n){
+  const registry=n.registry||{};
+  const hasSIR=registry.SIR&&registry.SIR!=='No prior entries';
   const bioCaptures=(n.bioCaptures||[]);
 
   let html=`
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-    <div style="font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);font-family:'DM Mono',monospace">NHCR Registry — Edit Mode</div>
+    <div style="font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);font-family:'DM Mono',monospace">Registry — Edit Mode</div>
     <div style="display:flex;gap:5px">
-      <div class="tbtn tbtn-s" style="font-size:9px;padding:2px 8px" onclick="nhcrPullForNode()">⊞ Pull</div>
-      <div class="tbtn tbtn-p" style="font-size:9px;padding:2px 8px" onclick="saveNHCREditor('${n.id}')">Save</div>
+      <div class="tbtn tbtn-s" style="font-size:9px;padding:2px 8px" onclick="registryPullForNode()">⊞ Pull</div>
+      <div class="tbtn tbtn-p" style="font-size:9px;padding:2px 8px" onclick="saveregistryEditor('${n.id}')">Save</div>
     </div>
   </div>
-  <div class="nhcr-unsaved" id="nhcr-unsaved-${n.id}">⚠ Unsaved changes</div>
+  <div class="registry-unsaved" id="registry-unsaved-${n.id}">⚠ Unsaved changes</div>
   <div style="background:var(--amber-d);border:1px solid rgba(255,170,0,0.2);border-radius:3px;padding:6px 9px;font-size:8px;color:var(--amber);font-family:'DM Mono',monospace;margin-bottom:10px;line-height:1.6">All registry edits are logged to the security intelligence audit trail and visible to authorised oversight.</div>`;
 
   if(hasSIR){
-    html+=`<div class="nhcr-sir-alert">⚑ SIR ACTIVE — ${nhcr.SIR}</div>`;
+    html+=`<div class="registry-sir-alert">⚑ SIR ACTIVE — ${registry.SIR}</div>`;
   }
 
-  NHCR_REGISTRIES.forEach(reg=>{
+  registry_REGISTRIES.forEach(reg=>{
     const regData={};
-    // Pull both exact-key and prefixed values from nhcr
-    Object.entries(nhcr).forEach(([k,v])=>{
+    // Pull both exact-key and prefixed values from registry
+    Object.entries(registry).forEach(([k,v])=>{
       if(k===reg.key)regData[reg.key]=v;
       else if(k.startsWith(reg.key+'_')||k.startsWith(reg.key+'.'))regData[k]=v;
     });
-    reg.fields.forEach(f=>{const fkey=reg.key+'_'+f.replace(/\s/g,'_');if(nhcr[fkey])regData[fkey]=nhcr[fkey];});
+    reg.fields.forEach(f=>{const fkey=reg.key+'_'+f.replace(/\s/g,'_');if(registry[fkey])regData[fkey]=registry[fkey];});
 
-    const hasData=Object.keys(regData).length>0||nhcr[reg.key];
+    const hasData=Object.keys(regData).length>0||registry[reg.key];
     const dotColor=hasData?reg.color:'var(--line2)';
 
-    html+=`<div class="nhcr-registry">
-      <div class="nhcr-reg-head" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'flex':'none'">
+    html+=`<div class="registry-registry">
+      <div class="registry-reg-head" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'flex':'none'">
         <div style="width:7px;height:7px;border-radius:50%;background:${dotColor};flex-shrink:0"></div>
-        <span class="nhcr-reg-title" style="color:${reg.color}">${reg.key}</span>
+        <span class="registry-reg-title" style="color:${reg.color}">${reg.key}</span>
         <span style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);flex:1">${reg.label}</span>
-        <span class="nhcr-reg-badge" style="background:${reg.color}15;color:${reg.color};border:1px solid ${reg.color}33">${hasData?'DATA':'EMPTY'}</span>
+        <span class="registry-reg-badge" style="background:${reg.color}15;color:${reg.color};border:1px solid ${reg.color}33">${hasData?'DATA':'EMPTY'}</span>
         <span style="color:var(--text3);font-size:10px;margin-left:6px">▾</span>
       </div>
-      <div class="nhcr-reg-body" style="display:${hasData?'flex':'none'}">
+      <div class="registry-reg-body" style="display:${hasData?'flex':'none'}">
         <div style="font-size:9px;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:7px;line-height:1.5">${reg.desc}</div>`;
 
     // Main registry value
-    html+=`<div class="nhcr-field">
-      <span class="nhcr-field-key">${reg.key}</span>
-      <textarea class="nhcr-field-val" data-nhcr-key="${reg.key}" rows="1" placeholder="—">${nhcr[reg.key]||''}</textarea>
+    html+=`<div class="registry-field">
+      <span class="registry-field-key">${reg.key}</span>
+      <textarea class="registry-field-val" data-registry-key="${reg.key}" rows="1" placeholder="—">${registry[reg.key]||''}</textarea>
     </div>`;
 
     // Structured sub-fields
     reg.fields.forEach(f=>{
       const fkey=reg.key+'_'+f.replace(/\s/g,'_');
-      const val=nhcr[fkey]||'';
-      html+=`<div class="nhcr-field">
-        <span class="nhcr-field-key">${f}</span>
-        <textarea class="nhcr-field-val" data-nhcr-key="${fkey}" rows="1" placeholder="—">${val}</textarea>
+      const val=registry[fkey]||'';
+      html+=`<div class="registry-field">
+        <span class="registry-field-key">${f}</span>
+        <textarea class="registry-field-val" data-registry-key="${fkey}" rows="1" placeholder="—">${val}</textarea>
       </div>`;
     });
 
     // Any extra custom keys that don't match the structured fields
-    Object.entries(nhcr).forEach(([k,v])=>{
+    Object.entries(registry).forEach(([k,v])=>{
       if(k===reg.key||reg.fields.map(f=>reg.key+'_'+f.replace(/\s/g,'_')).includes(k))return;
       // Check if this key "belongs" to this registry by prefix
       if(!k.startsWith(reg.key))return;
-      html+=`<div class="nhcr-field">
-        <span class="nhcr-field-key">${k}</span>
-        <textarea class="nhcr-field-val" data-nhcr-key="${k}" rows="1">${v}</textarea>
+      html+=`<div class="registry-field">
+        <span class="registry-field-key">${k}</span>
+        <textarea class="registry-field-val" data-registry-key="${k}" rows="1">${v}</textarea>
       </div>`;
     });
 
     html+=`<div style="margin-top:6px">
-      <div class="tbtn tbtn-g" style="font-size:8px;padding:2px 7px;display:inline-flex" onclick="addNHCRField('${n.id}','${reg.key}')">+ Add field</div>
+      <div class="tbtn tbtn-g" style="font-size:8px;padding:2px 7px;display:inline-flex" onclick="addregistryField('${n.id}','${reg.key}')">+ Add field</div>
     </div>`;
     html+=`</div></div>`;
   });
 
   // Custom / ungrouped fields
-  const usedKeys=new Set([...NHCR_REGISTRIES.flatMap(r=>[r.key,...r.fields.map(f=>r.key+'_'+f.replace(/\s/g,'_')),...NHCR_REGISTRIES.flatMap(r2=>Object.keys(nhcr).filter(k=>k.startsWith(r2.key)))])]);
-  const customEntries=Object.entries(nhcr).filter(([k])=>!NHCR_REGISTRIES.some(r=>k===r.key||k.startsWith(r.key+'_')||k.startsWith(r.key+'.')));
+  const usedKeys=new Set([...registry_REGISTRIES.flatMap(r=>[r.key,...r.fields.map(f=>r.key+'_'+f.replace(/\s/g,'_')),...registry_REGISTRIES.flatMap(r2=>Object.keys(registry).filter(k=>k.startsWith(r2.key)))])]);
+  const customEntries=Object.entries(registry).filter(([k])=>!registry_REGISTRIES.some(r=>k===r.key||k.startsWith(r.key+'_')||k.startsWith(r.key+'.')));
   if(customEntries.length){
-    html+=`<div class="nhcr-registry"><div class="nhcr-reg-head" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'flex':'none'">
+    html+=`<div class="registry-registry"><div class="registry-reg-head" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'flex':'none'">
       <div style="width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0"></div>
-      <span class="nhcr-reg-title">CUSTOM</span><span style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);flex:1">Other / imported fields</span>
+      <span class="registry-reg-title">CUSTOM</span><span style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);flex:1">Other / imported fields</span>
       <span style="color:var(--text3);font-size:10px;margin-left:6px">▾</span>
-    </div><div class="nhcr-reg-body">`;
+    </div><div class="registry-reg-body">`;
     customEntries.forEach(([k,v])=>{
-      html+=`<div class="nhcr-field">
-        <span class="nhcr-field-key">${k}</span>
-        <textarea class="nhcr-field-val" data-nhcr-key="${k}" rows="1">${v}</textarea>
+      html+=`<div class="registry-field">
+        <span class="registry-field-key">${k}</span>
+        <textarea class="registry-field-val" data-registry-key="${k}" rows="1">${v}</textarea>
       </div>`;
     });
     html+=`</div></div>`;
   }
 
   html+=`<div style="margin-top:10px;display:flex;gap:5px">
-    <div class="tbtn tbtn-s" style="font-size:9px" onclick="addNHCRCustomField('${n.id}')">+ Custom field</div>
+    <div class="tbtn tbtn-s" style="font-size:9px" onclick="addregistryCustomField('${n.id}')">+ Custom field</div>
     <div class="tbtn tbtn-g" style="font-size:9px" onclick="openBioCapture('${n.id}')">⬡ BioCapture</div>
   </div>`;
 
   return html;
 }
 
-function saveNHCREditor(nodeId){
+function saveregistryEditor(nodeId){
   const n=NODES.find(x=>x.id===nodeId);if(!n)return;
-  if(!n.nhcr)n.nhcr={};
+  if(!n.registry)n.registry={};
   const body=document.getElementById('rp-body');
-  body.querySelectorAll('.nhcr-field-val').forEach(el=>{
-    const key=el.dataset.nhcrKey;
-    if(key){const val=el.value.trim();if(val)n.nhcr[key]=val;else delete n.nhcr[key];}
+  body.querySelectorAll('.registry-field-val').forEach(el=>{
+    const key=el.dataset.registryKey;
+    if(key){const val=el.value.trim();if(val)n.registry[key]=val;else delete n.registry[key];}
   });
-  n.history.push('NHCR record edited — '+new Date().toLocaleString()+' — '+(currentAccount?.name||'analyst'));
-  document.getElementById('nhcr-unsaved-'+nodeId)?.classList.remove('show');
-  notify('NHCR record saved.',n.label,'green');
-  auditLog('NHCR','NHCR record edited',n.label);
+  n.history.push('registry record edited — '+new Date().toLocaleString()+' — '+(currentAccount?.name||'analyst'));
+  document.getElementById('registry-unsaved-'+nodeId)?.classList.remove('show');
+  notify('registry record saved.',n.label,'green');
+  auditLog('registry','registry record edited',n.label);
   window.draw();
 }
 
-function addNHCRField(nodeId,regKey){
+function addregistryField(nodeId,regKey){
   const fieldName=prompt('Field name:');
   if(!fieldName)return;
   const n=NODES.find(x=>x.id===nodeId);if(!n)return;
   const key=regKey+'_'+fieldName.replace(/\s/g,'_');
-  if(!n.nhcr)n.nhcr={};
-  n.nhcr[key]='';
-  rpCurrentTab='nhcr';
+  if(!n.registry)n.registry={};
+  n.registry[key]='';
+  rpCurrentTab='registry';
   renderRightPanel();
   notify('Field added.',key,'green');
 }
 
-function addNHCRCustomField(nodeId){
+function addregistryCustomField(nodeId){
   const fieldName=prompt('Custom field name:');
   if(!fieldName)return;
   const val=prompt('Value:','');
   const n=NODES.find(x=>x.id===nodeId);if(!n)return;
-  if(!n.nhcr)n.nhcr={};
-  n.nhcr[fieldName]=val||'';
-  rpCurrentTab='nhcr';
+  if(!n.registry)n.registry={};
+  n.registry[fieldName]=val||'';
+  rpCurrentTab='registry';
   renderRightPanel();
   notify('Custom field added.',fieldName,'green');
 }
@@ -5777,8 +5777,8 @@ function openBioCapture(nodeId){
   const col=n?COLORS[n.type]||'#7a90b0':'var(--text3)';
   document.getElementById('bio-subject-dot').style.background=col;
   document.getElementById('bio-subject-name').textContent=n?n.label:'No subject — will create new record';
-  document.getElementById('bio-subject-ref').textContent=n?(n.nhcr?.Reference||n.sub||n.id):'Provide NHCR reference below';
-  document.getElementById('bio-subject-status').textContent=n?(n.nhcr?.SIR||'No SIR entry'):'—';
+  document.getElementById('bio-subject-ref').textContent=n?(n.registry?.Reference||n.sub||n.id):'Provide registry reference below';
+  document.getElementById('bio-subject-status').textContent=n?(n.registry?.SIR||'No SIR entry'):'—';
   document.getElementById('bio-custody-ref').value='';
   document.getElementById('bio-ref').value='BIO-D14-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000);
   // Pre-fill operator with current account badge
@@ -5825,7 +5825,7 @@ function runBioCapture(){
   setTimeout(()=>{
     area.classList.remove('scanning');area.classList.add('done');
     document.getElementById('bio-scan-label').textContent='Capture complete';
-    document.getElementById('bio-scan-sub').textContent='Quality check passed · Ready to submit to NHCR';
+    document.getElementById('bio-scan-sub').textContent='Quality check passed · Ready to submit to registry';
     document.getElementById('bio-capture-btn').disabled=false;
     // Generate result
     const ref=document.getElementById('bio-ref').value.trim()||'BIO-'+Date.now();
@@ -5862,12 +5862,12 @@ function confirmBioCapture(){
     // Attach capture to node
     if(!n.bioCaptures)n.bioCaptures=[];
     n.bioCaptures.push({...bioCaptureResult});
-    // Update NHCR SIR
-    if(!n.nhcr)n.nhcr={};
-    const existing=n.nhcr.SIR||'';
-    n.nhcr.SIR=(existing&&existing!=='No prior entries'?existing+' | ':'')+'BioCapture '+bioCaptureResult.type+' '+ref+' — '+bioCaptureResult.ts;
-    n.nhcr['BioCapture_'+bioCaptureResult.type]=ref+' · '+bioCaptureResult.ts+' · Quality '+bioCaptureResult.quality+'%';
-    if(bioCaptureResult.custodyRef)n.nhcr['Custody_Ref']=bioCaptureResult.custodyRef;
+    // Update registry SIR
+    if(!n.registry)n.registry={};
+    const existing=n.registry.SIR||'';
+    n.registry.SIR=(existing&&existing!=='No prior entries'?existing+' | ':'')+'BioCapture '+bioCaptureResult.type+' '+ref+' — '+bioCaptureResult.ts;
+    n.registry['BioCapture_'+bioCaptureResult.type]=ref+' · '+bioCaptureResult.ts+' · Quality '+bioCaptureResult.quality+'%';
+    if(bioCaptureResult.custodyRef)n.registry['Custody_Ref']=bioCaptureResult.custodyRef;
     n.history.push('BioCapture '+bioCaptureResult.type+' confirmed — '+ref+' — '+bioCaptureResult.ts);
     // Flag update
     if(!n.flags.some(f=>f.title==='BIOMETRIC ON FILE')){
@@ -5881,12 +5881,12 @@ function confirmBioCapture(){
     notify('Capture logged.','No node attached — standalone capture record '+ref,'amber');
   }
 
-  auditLog('BIOCAPTURE','Capture confirmed & submitted to NHCR',ref);
-  // 90-second NHCR confirmation notification
+  auditLog('BIOCAPTURE','Capture confirmed & submitted to registry',ref);
+  // 90-second registry confirmation notification
   setTimeout(()=>{
     notify('Registry record confirmed.',ref+' · Biometric record now active in registry.','green');
   },90000);
-  notify('NHCR submission initiated.',ref+' · Confirmation in ~90 seconds.','blue');
+  notify('registry submission initiated.',ref+' · Confirmation in ~90 seconds.','blue');
   closeBioCapture();
 }
 
@@ -5963,14 +5963,14 @@ const TUTORIAL_STEPS=[
   },
   {
     title:'The Toolbar',
-    body:'The toolbar gives you access to every major platform function. From left to right: add objects and links, import CSV data, pull NHCR registry records, refresh the LBI feed, graph layout controls, analysis tools, and workspace management.',
+    body:'The toolbar gives you access to every major platform function. From left to right: add objects and links, import CSV data, pull registry records, refresh the LBI feed, graph layout controls, analysis tools, and workspace management.',
     tip:'Hover any toolbar button to see its function. Many toolbar actions are also available via the Ctrl+K command palette.',
     target:'toolbar',
     position:'below',
   },
   {
-    title:'NHCR Registry Access',
-    body:'The NHCR tab on any person node gives you direct access to that subject\'s registry data across six registers: EAR (education), PER (employment), CPPR (civic), SIR (security intelligence), LBI (behavioural index), and MCSI (civic standing).<br><br>Click any field to edit it. Press Save to commit changes.',
+    title:'Registry Access',
+    body:'The registry tab on any person node gives you direct access to that subject\'s registry data across six registers: EAR (education), PER (employment), CPPR (civic), SIR (security intelligence), LBI (behavioural index), and CSI (civic standing).<br><br>Click any field to edit it. Press Save to commit changes.',
     tip:'All registry queries and edits are logged to the security intelligence audit trail and visible to authorised oversight. The Audit Log (📋 Audit in toolbar) shows your full session activity.',
     target:'rp',
     position:'left',
