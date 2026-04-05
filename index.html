@@ -1198,7 +1198,7 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
         <select class="qb-select" id="qb-find" onchange="updateQBPreview()"><option value="persons">Persons</option><option value="objects">All objects</option><option value="locations">Locations</option><option value="financial">Financial objects</option><option value="organisations">Organisations</option><option value="flagged">Flagged objects</option></select>
       </div>
       <div class="qb-clause"><span class="qb-clause-label">WHERE</span>
-        <select class="qb-select" id="qb-where" onchange="updateQBPreview()"><option value="any">Any object</option><option value="lbi.flag = TRUE">LBI flag active</option><option value="flag = DFI">DFI flagged</option><option value="type = flag">In custody / priority</option><option value="nhcr.sir CONTAINS custody">SIR: in custody</option><option value="has.annotations">Has annotations</option></select>
+        <select class="qb-select" id="qb-where" onchange="updateQBPreview()"><option value="any">Any object</option><option value="lbi.flag = TRUE">LBI flag active</option><option value="flag = DFI">Flagged</option><option value="type = flag">In custody / priority</option><option value="nhcr.sir CONTAINS custody">SIR: in custody</option><option value="has.annotations">Has annotations</option></select>
       </div>
       <div class="qb-clause"><span class="qb-clause-label">LINKED-TO</span>
         <select class="qb-select" id="qb-linked" onchange="updateQBPreview()"><option value="">— (no link filter) —</option></select>
@@ -3328,7 +3328,7 @@ function buildReportHTML(){
     <div class="pdf-stat"><div class="pdf-stat-n">${LINKS.length}</div><div class="pdf-stat-l">Links</div></div>
     <div class="pdf-stat"><div class="pdf-stat-n">${confirmedLinks.length}</div><div class="pdf-stat-l">Confirmed</div></div>
     <div class="pdf-stat"><div class="pdf-stat-n">${flagged.length}</div><div class="pdf-stat-l">Priority Flags</div></div>
-    <div class="pdf-stat"><div class="pdf-stat-n">${dfiNodes.length}</div><div class="pdf-stat-l">DFI Flagged</div></div>
+    <div class="pdf-stat"><div class="pdf-stat-n">${dfiNodes.length}</div><div class="pdf-stat-l">Flagged</div></div>
     <div class="pdf-stat"><div class="pdf-stat-n">${Object.keys(commGroups).length||'—'}</div><div class="pdf-stat-l">Communities</div></div>
   </div>
 
@@ -3907,7 +3907,7 @@ function renderRightPanel(){
 // SIDEBAR
 // ═══════════════════════════════════════════════════════════════════════
 function renderSidebar(filter=''){
-  const types={flag:'flag/custody',dfi:'DFI flagged',person:'Persons',org:'Organisations',location:'Locations',finance:'Financial',event:'Events'};
+  const types={flag:'flag/custody',dfi:'Flagged',person:'Persons',org:'Organisations',location:'Locations',finance:'Financial',event:'Events'};
   const grouped={};
   NODES.filter(n=>!filter||n.label.toLowerCase().includes(filter.toLowerCase())).forEach(n=>{
     const g=n.type==='flag'||n.type==='dfi'?'flagged':n.type;
@@ -5936,7 +5936,7 @@ const TUTORIAL_STEPS=[
   {
     title:'The Investigation Graph',
     body:'The central canvas is a force-directed graph. Every person, organisation, location, and financial entity is a <strong style="color:var(--bright)">node</strong>. Every known relationship between them is a <strong style="color:var(--bright)">link</strong>.<br><br>Drag any node to reposition it. Scroll to zoom. Click and drag the background to pan.',
-    tip:'Nodes are colour-coded by type: blue = person, red = priority/custody, cyan = organisation, green = location, purple = financial, amber = DFI flagged.',
+    tip:'Nodes are colour-coded by type: blue = person, red = priority/custody, cyan = organisation, green = location, purple = financial, amber = flagged.',
     target:'canvas-wrap',
     position:'right',
   },
