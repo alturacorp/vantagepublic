@@ -714,57 +714,49 @@ textarea.rpt2-fi{resize:vertical;min-height:60px;font-family:'DM Mono',monospace
     </div>
     <div class="region-card">
       <div class="region-title">Select your region</div>
-      <div class="region-sub">Vantage adapts its terminology, legal reference framework, and data handling defaults to your jurisdiction. This selection affects how registry fields, classification levels, and audit language are presented throughout the platform. It does not restrict functionality.</div>
+      <div class="region-sub">Vantage adapts its data handling defaults to your jurisdiction.</div>
 
       <div class="region-grid" id="region-grid">
         <div class="region-card-item" data-region="europe" onclick="selectRegion(this)">
           <div class="region-flag">🌍</div>
           <div class="region-name">Europe</div>
-          <div class="region-desc">EU &amp; non-EU member states<br>LED · GDPR · national frameworks</div>
         </div>
         <div class="region-card-item" data-region="africa" onclick="selectRegion(this)">
           <div class="region-flag">🌍</div>
           <div class="region-name">Africa</div>
-          <div class="region-desc">AU member states<br>Malabo Convention · INTERPOL</div>
         </div>
         <div class="region-card-item" data-region="north_america" onclick="selectRegion(this)">
           <div class="region-flag">🌎</div>
           <div class="region-name">North America</div>
-          <div class="region-desc">US · Canada · Mexico<br>CJIS · PIPEDA · LFPDPPP</div>
         </div>
         <div class="region-card-item" data-region="south_america" onclick="selectRegion(this)">
           <div class="region-flag">🌎</div>
           <div class="region-name">South America</div>
-          <div class="region-desc">MERCOSUR &amp; Pacific Alliance states<br>LGPD · PDPA · national frameworks</div>
         </div>
         <div class="region-card-item" data-region="east_asia" onclick="selectRegion(this)">
           <div class="region-flag">🌏</div>
           <div class="region-name">East Asia</div>
-          <div class="region-desc">China · Japan · Korea &amp; region<br>PIPL · APPI · PIPA</div>
         </div>
         <div class="region-card-item" data-region="central_west_asia" onclick="selectRegion(this)">
           <div class="region-flag">🌍</div>
           <div class="region-name">Central &amp; West Asia</div>
-          <div class="region-desc">Central Asian republics · Caucasus · West Asia<br>SCO · bilateral frameworks</div>
         </div>
         <div class="region-card-item" data-region="south_asia" onclick="selectRegion(this)">
           <div class="region-flag">🌏</div>
           <div class="region-name">South Asia</div>
-          <div class="region-desc">India · Pakistan · Bangladesh &amp; region<br>DPDP · PECA · SAARC</div>
         </div>
         <div class="region-card-item" data-region="southeast_asia" onclick="selectRegion(this)">
           <div class="region-flag">🌏</div>
           <div class="region-name">Southeast Asia</div>
-          <div class="region-desc">ASEAN member states<br>PDPA · PDP Law · ASEANAPOL</div>
         </div>
       </div>
 
-      <div class="region-legal" id="region-legal-note">Select a region above to see applicable legal framework information.</div>
+      <div class="region-legal" id="region-legal-note">Select a region above.</div>
 
       <div style="display:flex;justify-content:flex-end">
         <button class="tbtn tbtn-p" id="region-confirm-btn" style="font-size:12px;padding:9px 24px;opacity:0.4;cursor:not-allowed" disabled onclick="confirmRegion()">Continue →</button>
       </div>
-      <div class="region-disclaimer">This selection stores a regional preference in your browser only.<br>No data is transmitted to Altura Technologies or any third party.</div>
+      <div class="region-disclaimer">Altura Technologies and their selected third parties will receive this information for sanctions compliance and global analytics purposes.</div>
     </div>
   </div>
 </div>
@@ -5132,64 +5124,6 @@ window.saveWorkspace=function(){_origSaveWorkspace();saveCurrentToWsLibrary();};
 function regionKey(){return'vantage_region_v4';}
 
 const REGIONS={
-  europe:{
-    name:'Europe',flag:'🇪🇺',
-    legal:'Operating under applicable national law and, where relevant, the Law Enforcement Directive (EU) 2016/680, GDPR (EU) 2016/679, and applicable national transpositions. Cross-border intelligence sharing subject to bilateral and multilateral treaty frameworks. Surveillance and interception require national judicial or executive authorisation as applicable.',
-    registryLabel:'National Criminal Database',
-    classificationDefault:'RESTRICTED',
-    auditNote:'LED Art. 46 requires logging of all processing operations. Retention periods set by applicable national supervisory authority. Cross-border data transfers subject to applicable adequacy or transfer mechanism requirements.',
-  },
-  africa:{
-    name:'Africa',flag:'🌍',
-    legal:'Operating under applicable national law and relevant regional frameworks including the African Union Convention on Cyber Security and Personal Data Protection (Malabo Convention) where ratified. Law enforcement data access subject to applicable national legislation. Cross-border cooperation governed by bilateral treaties and INTERPOL protocols.',
-    registryLabel:'National Criminal Records Database',
-    classificationDefault:'RESTRICTED',
-    auditNote:'Applicable national data protection authority requirements govern retention. INTERPOL I-24/7 access subject to NCB authorisation. Audit logs retained per applicable national government framework.',
-  },
-  north_america:{
-    name:'North America',flag:'🌎',
-    legal:'Operating under applicable federal and state or provincial law. In the United States: CJIS Security Policy and relevant federal surveillance statutes. In Canada: PIPEDA, the Criminal Code, and the CSIS Act. In Mexico: LFPDPPP and applicable federal security legislation. Cross-border cooperation governed by bilateral and multilateral law enforcement assistance treaties.',
-    registryLabel:'National Criminal History / NCIC',
-    classificationDefault:'LAW ENFORCEMENT SENSITIVE',
-    auditNote:'CJIS Policy Section 5.4 requires audit log retention for US agencies. Third-party access requires criminal justice agency agreement. Canadian agencies subject to TBS Directive on Security Management.',
-  },
-  south_america:{
-    name:'South America',flag:'🌎',
-    legal:'Operating under applicable national law. Data protection regimes vary by jurisdiction — including Brazil\'s LGPD, Argentina\'s PDPA, and applicable national equivalents. Law enforcement data access subject to national judicial authorisation frameworks. Cross-border cooperation governed by MERCOSUR frameworks and bilateral treaties.',
-    registryLabel:'National Criminal Registry',
-    classificationDefault:'RESTRICTED',
-    auditNote:'Applicable national data protection authority requirements govern retention and access. INTERPOL I-24/7 access subject to NCB authorisation. Audit logs retained per applicable national government data governance policy.',
-  },
-  east_asia:{
-    name:'East Asia',flag:'🌏',
-    legal:'Operating under applicable national law. Jurisdictions include distinct frameworks — including China\'s PIPL and DSL, Japan\'s APPI, South Korea\'s PIPA, and applicable equivalents. Law enforcement and intelligence activities governed by applicable national security legislation. Cross-border data transfers subject to applicable national data localisation and transfer requirements.',
-    registryLabel:'National Registry / Criminal History Database',
-    classificationDefault:'RESTRICTED',
-    auditNote:'Applicable national supervisory authority requirements govern audit retention. Data localisation requirements may restrict cross-border transmission. Audit logs subject to applicable national security legislation.',
-  },
-  central_west_asia:{
-    name:'Central & West Asia',flag:'🌍',
-    legal:'Operating under applicable national law. Jurisdictions span diverse legal frameworks across Central Asian republics, the Caucasus, and West Asian states. Law enforcement data access subject to applicable national judicial or executive authorisation frameworks. Cross-border cooperation governed by bilateral treaties, SCO frameworks where applicable, and INTERPOL protocols.',
-    registryLabel:'National Criminal Records / Security Database',
-    classificationDefault:'RESTRICTED',
-    auditNote:'Applicable national data governance policy governs audit retention and access controls. SCO member states subject to Regional Anti-Terrorist Structure protocols where applicable. INTERPOL I-24/7 access subject to NCB authorisation.',
-  },
-  south_asia:{
-    name:'South Asia',flag:'🌏',
-    legal:'Operating under applicable national law. Jurisdictions include India\'s DPDP Act 2023 and CrPC, Pakistan\'s PECA and applicable security legislation, Bangladesh\'s Digital Security Act, and applicable national equivalents. Intelligence activities governed by applicable central government frameworks. Cross-border cooperation subject to bilateral treaties and SAARC protocols.',
-    registryLabel:'National Criminal Tracking / Registry System',
-    classificationDefault:'RESTRICTED',
-    auditNote:'Applicable national data governance guidelines apply. Audit log retention per applicable government framework. Cross-border data transfers subject to applicable bilateral data sharing agreements.',
-  },
-  southeast_asia:{
-    name:'Southeast Asia',flag:'🌏',
-    legal:'Operating under applicable national law and, where adopted, the ASEAN Digital Data Governance Framework. Jurisdictions include Singapore\'s PDPA, Thailand\'s PDPA, Indonesia\'s PDP Law, and applicable national equivalents. Law enforcement data access subject to national judicial or executive authorisation frameworks. Cross-border cooperation governed by ASEANAPOL frameworks and bilateral treaties.',
-    registryLabel:'National Registry / ASEANAPOL Database',
-    classificationDefault:'RESTRICTED',
-    auditNote:'ASEANAPOL protocols govern cross-border law enforcement data sharing. Applicable national data protection authority requirements govern retention. Audit logs subject to applicable national security legislation.',
-  },
-};
-
 
 let selectedRegionId=null;
 
